@@ -1,0 +1,338 @@
+<!doctype html>
+<meta charset="utf-8" />
+<title>Demo of complex text in WebGL</title>
+<style>
+  :root {
+    color-scheme: dark;
+  }
+  #canvas {
+    border: 1px solid blue;
+    width: 638px;
+    height: 318px;
+    position: relative;
+  }
+  #drawElement {
+    overflow: auto;
+  }
+  form p {
+    margin: 6px;
+  }
+
+.filters {
+  display: flex;
+  font-family: monospace;
+  background: black;
+  color: white;
+  padding: 0.5em;
+  align-items: center;
+  width: 100%;
+  justify-content: space-around;
+}
+.filters {
+  top: 0;
+}
+.filters span {
+    padding: 0 0.5em;
+}
+.filters a {
+  color: #08F;
+}
+.filters select {
+  background:#333;
+  color: white;
+  border: 0;
+  padding: 0.5em;
+  font-family: monospace;
+}
+</style>
+
+<div class="filters">
+  <div>filter: <select></select></div>
+  <div>
+    <span></span><a id="src">src</a>
+    <span>author:</span><a id="author"></a>
+    <span>license:</span><a id="license"></a>
+    <span></span>
+  </div>
+</div>
+
+
+<canvas id="canvas" width="638" height="318" layoutsubtree="true">
+  <div id=drawElement style="width: 578px; height: 100%">
+    <div>
+      <form id="demo-form" action="#" method="get">
+        <fieldset>
+          <legend>🚀 Spaceship Control Panel</legend>
+          <p id="count"></p>
+          <p>
+            <label for="shipName">Ship Name:</label>
+            <input type="text" id="shipName" value="The 'Canvas' Voyager">
+          </p>
+          <p>
+            <input type="checkbox" id="hyperdrive" checked>
+            <label for="hyperdrive">Engage Hyperdrive</label>
+          </p>
+          <fieldset>
+            <legend>Target System</legend>
+            <p>
+              <input type="radio" id="alpha" name="system" value="alpha" checked>
+              <label for="alpha">Alpha Centauri</label>
+            </p>
+            <p>
+              <input type="radio" id="beta" name="system" value="beta">
+              <label for="beta">Betelgeuse</label>
+            </p>
+          </fieldset>
+          <p>
+            <label for="shieldLevel">Shield Strength:</label>
+            <input type="range" id="shieldLevel" min="0" max="100" value="75">
+          </p>
+          <p style="text-align: right; margin: 0;">
+            <button type="submit">Launch!</button>
+          </p>
+        </fieldset>
+      </form>
+      <p>
+  👇👇👇 More content down here 👇👇👇
+      </p>
+      <p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi urna risus, efficitur at efficitur eget, iaculis eu turpis. Donec volutpat, nunc id tincidunt porta, ipsum justo vestibulum leo, pellentesque semper sapien risus a enim. Sed feugiat convallis mollis. Vivamus id purus pellentesque, dictum eros a, mollis neque. Ut ornare tortor sed lectus egestas porttitor. In condimentum nisl a interdum tempus. Fusce nulla arcu, euismod ac metus at, tempus rhoncus dolor. Nam dictum erat ac justo tempor, a fringilla dolor porta. Duis neque libero, ultrices vitae quam ut, convallis feugiat arcu. Mauris pellentesque euismod metus vel mattis. Vivamus efficitur nec sem vel dignissim. Etiam quis diam at elit cursus eleifend. Phasellus commodo dui nulla, id facilisis ligula consequat quis. Vivamus feugiat porta ligula id accumsan. Aliquam porttitor suscipit malesuada.
+      </p><p>
+Nam neque nisi, accumsan ut velit in, maximus feugiat diam. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent mattis quam nec velit pretium, tristique egestas turpis vehicula. Donec tempus auctor magna, quis condimentum est rhoncus at. Etiam mattis fringilla nulla a elementum. Aliquam bibendum nisl urna, at mattis elit egestas at. Curabitur mattis augue sed nisi aliquam varius. Sed accumsan, eros eu tincidunt malesuada, mauris lacus fringilla orci, id congue sem felis at sapien. Maecenas et ullamcorper tortor. Quisque sollicitudin arcu nibh, nec dictum turpis aliquet in. Fusce efficitur volutpat rutrum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas hendrerit imperdiet nisi, non fermentum tortor ultrices id. Nunc id nisl in felis ullamcorper consequat at et diam. Curabitur iaculis mauris enim. Integer eu mauris id justo facilisis egestas.
+      </p><p>
+Nullam condimentum, justo vel tincidunt pharetra, enim risus sodales massa, non blandit enim nibh sit amet orci. Integer scelerisque neque purus, ac dapibus erat commodo nec. Vestibulum pharetra tristique nisl eu pellentesque. Quisque vulputate risus et odio efficitur, sit amet pharetra eros imperdiet. Nullam ac hendrerit enim, eget placerat magna. Duis consequat, tellus ut suscipit gravida, orci sem vulputate odio, quis rhoncus neque mauris vitae purus. Nam quis volutpat velit. Integer ac eleifend ipsum. Nulla tempus eros id ullamcorper pretium. Praesent ac sodales arcu. Morbi volutpat consequat velit, sed dapibus lectus ultricies in. Aliquam sed lorem eget velit malesuada tempor vel et nisl. Sed non malesuada nibh, nec cursus odio.
+      </p><p>
+Morbi fringilla ultricies hendrerit. Nulla et pulvinar risus. Maecenas sit amet venenatis mi, nec accumsan ligula. Proin elit metus, tincidunt eu dignissim quis, porta aliquet odio. Aliquam non congue magna. Sed scelerisque lobortis tristique. Cras eget arcu diam. Aliquam et laoreet arcu. Morbi ut est nec ligula maximus lacinia eu sed lacus. Phasellus a blandit tellus, ac rutrum dolor. Duis blandit dolor quam, in dictum velit dapibus sed. Aliquam luctus, nisi in sollicitudin gravida, mi orci volutpat mauris, eu euismod ex lacus id tellus.
+      </p><p>
+Integer tempor leo lacinia massa suscipit, sed sodales metus facilisis. In non felis id eros bibendum tempus id a nunc. Duis sed tincidunt ipsum, sit amet dictum sapien. Etiam eget dui facilisis, pulvinar lacus vitae, convallis ligula. Curabitur interdum libero sed risus lacinia, at bibendum nulla egestas. Suspendisse potenti. Fusce at faucibus urna. Etiam vitae leo hendrerit neque posuere elementum id a turpis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Pellentesque pulvinar mauris vel diam lobortis convallis. Duis eu sem a dolor viverra dictum.
+      </p>
+    </div>
+  </div>
+</canvas>
+
+<script type="module">
+import * as twgl from 'https://twgljs.org/dist/7.x/twgl-full.module.js';
+
+import defaultFilter from './filters/default.js';
+import oldTelevisionFrame from './filters/old-television-frame.js';
+import oldTV from './filters/old-tv.js';
+import oldTVEffect from './filters/old-tv-effect.js';
+import glitch2 from './filters/glitch2.js';
+import vcrDistortion from './filters/vcr-distortion.js';
+import distortedTV from './filters/distorted-tv.js';
+import mattiasCRT from './filters/mattias-crt.js';
+import hq4x from './filters/hq4x/hq4x.js';
+import loResRoto from './filters/lo-res-roto.js';
+import hiResRoto from './filters/hi-res-roto.js';
+import bugInTheTV from './filters/bug-in-the-tv.js';
+import ledDisplay from './filters/led-display.js';
+import doubleVision from './filters/double-vision.js';
+import gbClassic from './filters/gb-classic.js';
+import cmykHalftone from './filters/cmyk-halftone.js';
+import thinWater from './filters/thin-water.js';
+import pinscreenVideo from './filters/pinscreen-video.js';
+
+const filters = [
+  defaultFilter,
+  oldTelevisionFrame,
+  oldTV,
+//  oldTVEffect,
+  glitch2,
+  vcrDistortion,
+  distortedTV,
+  mattiasCRT,
+//  hq4x, // only useful for upscaling lo-res images
+  bugInTheTV,
+  ledDisplay,
+  doubleVision,
+  gbClassic,
+  loResRoto,
+  hiResRoto,
+  cmykHalftone,
+  thinWater,
+  pinscreenVideo,
+];
+
+const gl = document.querySelector('#canvas').getContext('webgl2');
+
+const srcElem = document.querySelector('#src');
+const authorElem = document.querySelector('#author');
+const licenseElem = document.querySelector('#license');
+
+let progInfo;
+
+function setLink(elem, href, content) {
+  elem.textContent = content || '';
+  elem.href = href;
+  const show = href ? '' : 'none';
+  elem.style.display = show;
+  elem.previousSibling.style.display = show;
+}
+
+function setFilter(ndx) {
+  const filterInfo = filters[ndx];
+  const {author, authorUrl, src, license, licenseUrl, filter} = filterInfo;
+  setLink(srcElem, src, 'src');
+  setLink(authorElem, authorUrl, author);
+  setLink(licenseElem, licenseUrl, license);
+
+  const vs = `#version 300 es
+    const vec2 pos[3] = vec2[](vec2(-1, 3), vec2(3, -1), vec2(-1, -1));
+
+    void main(void) {
+      vec2 p = pos[gl_VertexID];
+      gl_Position = vec4(p, 0, 1);
+    }
+  `;
+
+  const fs = `#version 300 es
+    #ifdef GL_FRAGMENT_PRECISION_HIGH
+      precision highp float;
+    #else
+      precision mediump float;
+    #endif
+
+    uniform vec3 iResolution;
+    uniform float iTime;
+    uniform float iTimeDelta;
+    uniform float iFrame;
+    uniform float iChannelTime[4];
+    uniform vec4 iMouse;
+    uniform vec4 iDate;
+    uniform float iSampleRate;
+    uniform vec3 iChannelResolution[4];
+    uniform sampler2D iChannel0;
+    uniform sampler2D iChannel1;
+    uniform sampler2D iChannel2;
+    uniform sampler2D iChannel3;
+
+    out vec4 fragColor;
+
+  #define texture2D texture  // GLSL 1.0 ES to GLSL 3.0 ES
+  #define transpose transpose_t
+
+    ${filterInfo.filter.fragmentShader}
+
+    void main(void) {
+      mainImage(fragColor, gl_FragCoord.xy);
+    }
+  `;
+
+  progInfo = twgl.createProgramInfo(gl, [vs, fs]);
+}
+
+let firstFilterNdx = 7;
+const settings = Object.fromEntries(new URLSearchParams(window.location.search).entries());
+if (settings.filter) {
+  const index = filters.map(f => f.name).indexOf(settings.filter);
+  if (index >= 0) {
+    firstFilterNdx = index;
+  }
+}
+
+const selectElem = document.querySelector('.filters select');
+filters.forEach((filter) => {
+  const optionElem = document.createElement('option');
+  optionElem.innerText = filter.name;
+  selectElem.appendChild(optionElem);
+});
+selectElem.selectedIndex = firstFilterNdx;
+selectElem.addEventListener('change', () => {
+  const url = new URL(window.location.href);
+  url.searchParams.set('filter', filters[selectElem.selectedIndex].name);
+  history.replaceState(null, '', url.href);
+  setFilter(selectElem.selectedIndex);
+});
+
+setFilter(firstFilterNdx);
+
+const countElem = document.querySelector('#count');
+
+const texture = gl.createTexture();
+gl.bindTexture(gl.TEXTURE_2D, texture);
+// Linear texture filtering produces better results than mipmap with text.
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+
+function updateTextureWithHTML() {
+  const level = 0;
+  const internalFormat = gl.RGBA;
+  const srcFormat = gl.RGBA;
+  const srcType = gl.UNSIGNED_BYTE;
+
+  gl.bindTexture(gl.TEXTURE_2D, texture);
+  gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, true);
+  gl.texElementImage2D(gl.TEXTURE_2D, level, internalFormat,
+                          srcFormat, srcType, drawElement);
+}
+
+const textureDimensions = [
+  1, 1, 1,
+  1, 1, 1,
+  1, 1, 1,
+  1, 1, 1,
+];
+
+let requestId;
+function requestRender() {
+  if (!requestId) {
+    requestId = requestAnimationFrame(render);
+  }
+}
+
+const pad02 = (v) => v.toString().padStart(2, '0'); 
+const pad03 = (v) => v.toString().padStart(3, '0'); 
+
+let frameCount = 0;
+let then = 0;
+function render() {
+  requestId = undefined;
+  const now = performance.now() * 0.001;
+  const delta = now - then;
+  then = now;
+
+  {
+    const h = now / 60 / 60 | 0;
+    const m = (now / 60 | 0) % 60;
+    const s = now | 0;
+    const ms = (now * 1000 | 0) % 1000;
+    countElem.textContent = `${pad02(h)}:${pad02(m)}:${pad02(s)}.${pad03(ms)}`;
+  }
+
+  textureDimensions[0] = gl.canvas.width;
+  textureDimensions[1] = gl.canvas.height;
+
+  updateTextureWithHTML();
+  gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+  gl.useProgram(progInfo.program);
+  twgl.setUniforms(progInfo, {
+    iResolution: [gl.canvas.width, gl.canvas.height, 1],
+    iTime: now,
+    iTimeDelta: delta,
+    iFrame: frameCount++,
+    iChannelTime: [now, now, now, now],
+    iMouse: [0, 0, 0, 0],
+    iDate: Date.now() * 0.001,
+    iSampleRate: 1,
+    iChannelResolution: textureDimensions,
+    iChannel0: texture,
+    iChannel1: texture,
+    iChannel2: texture,
+    iChannel3: texture,
+  });
+  gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+  requestRender();
+}
+
+const observer = new ResizeObserver((entries) => {
+  const entry = entries.find((entry) => entry.target === canvas);
+  canvas.width = entry.devicePixelContentBoxSize[0].inlineSize;
+  canvas.height = entry.devicePixelContentBoxSize[0].blockSize;
+  requestRender();
+});
+
+// See: https://web.dev/articles/device-pixel-content-box
+observer.observe(canvas, {box: ['device-pixel-content-box']});
+</script>
